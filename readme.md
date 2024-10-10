@@ -1,9 +1,11 @@
-# Eric Demo Express Server
+# Eric Demo Express Server (under construction)
 Welcome! I'm Eric Cheng, and this repository is one of my personal demo project to showcase my full stack and AI development skills.
 
 This project serves as a demonstration of my Node Js Express Server knowledge and its API development paradigms. It is a simple Express server that serves as a backend for my [Eric Demo React App](https://agreeable-water-061d90800.5.azurestaticapps.net)
 
-
+![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/-Express%20JS-FFFF00?logo=express&logoColor=black)
+![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?logo=graphql&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/-TypeScript-007ACC?logo=typescript&logoColor=white&style=flat)
 ![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/-GitHub%20Actions-2088FF?logo=github-actions&logoColor=white)
