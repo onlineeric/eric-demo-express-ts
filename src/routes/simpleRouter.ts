@@ -9,6 +9,11 @@ router.get('/:id', (req: Request, res: Response) => {
   res.send({ message: `Simple get response with id: ${req.params.id}` });
 });
 
+// get query strings "/simple/query/4466?name=John&age=30"
+router.get('/query/:id', (req: Request, res: Response) => {
+  res.send({ message: `Simple get response for id: ${req.params.id} with query strings name and age`, name: req.query.name, age: req.query.age });
+});
+
 router.post('', (req: Request, res: Response) => {
   res.send({ message: 'Simple post response', body: req.body });
 });
