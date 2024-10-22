@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import basicAuth from "./middlewares/basicAuth";
 import simpleRouter from "./routes/simpleRouter";
+import benchmarkRouter from "./routes/benchmarkRouter";
 
 // import package.json and read the version
 import { version as appVersion } from '../package.json';
@@ -19,5 +20,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use(basicAuth);
 
 app.use('/simple', simpleRouter);
+
+app.use('/benchmark', benchmarkRouter);
 
 export default app;
