@@ -24,5 +24,22 @@ export function handleSha256Request(req: Request, res: Response) {
 }
 
 export function handleMd5Request(req: Request, res: Response) {
-	res.send({ message: `Md5 Execute times: ${req.params.execTimes}` });
+	const loopCount = parseInt(req.params.execTimes) || 1000;
+	const HASH_ALGORITHM = 'md5';
+
+	const benchmarkCls = new BenchmarkCls(HASH_ALGORITHM);
+
+	benchmarkCls.startBenchmarking();
+
+	// Execute Benchmark
+	for (let i = 0; i < loopCount; i++) {
+		const md5 = crypto.createHash(HASH_ALGORITHM);
+		md5.update(benchmarkCls.testData);
+		md5.digest();
+	}
+
+	benchmarkCls.calcBenchmarking();
+
+	// Send Response
+	res.send({ message: benchmarkCls.result });
 }
