@@ -13,14 +13,14 @@ export function handleSha256Request(req: Request, res: Response) {
 	// Execute Benchmark
 	for (let i = 0; i < loopCount; i++) {
 		const sha256 = crypto.createHash(HASH_ALGORITHM);
-		sha256.update(benchmarkCls.testData);
+		sha256.update(benchmarkCls.getTestData());
 		sha256.digest();
 	}
 
 	benchmarkCls.calcBenchmarking();
 
 	// Send Response
-	res.send({ message: benchmarkCls.result });
+	res.send({ message: benchmarkCls.getResult() });
 }
 
 export function handleMd5Request(req: Request, res: Response) {
@@ -34,12 +34,12 @@ export function handleMd5Request(req: Request, res: Response) {
 	// Execute Benchmark
 	for (let i = 0; i < loopCount; i++) {
 		const md5 = crypto.createHash(HASH_ALGORITHM);
-		md5.update(benchmarkCls.testData);
+		md5.update(benchmarkCls.getTestData());
 		md5.digest();
 	}
 
 	benchmarkCls.calcBenchmarking();
 
 	// Send Response
-	res.send({ message: benchmarkCls.result });
+	res.send({ message: benchmarkCls.getResult() });
 }

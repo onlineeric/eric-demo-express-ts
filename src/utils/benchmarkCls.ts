@@ -2,16 +2,20 @@ import seedrandom from "seedrandom";
 import IBenchmarkResult from "./IBenchmarkResult";
 
 class BenchmarkCls {
-	hashAlgorithm: string;
-	testData: Buffer;
-	result: IBenchmarkResult | null = null;
+	private hashAlgorithm: string;
+	private testData: Buffer;
+	private result: IBenchmarkResult | null = null;
 
 	// Benchmarking starting data
-	startCpu: NodeJS.CpuUsage | null = null;
-	startMemory: number = 0;
-	startTime: [number, number] | null = null;
+	private startCpu: NodeJS.CpuUsage | null = null;
+	private startMemory: number = 0;
+	private startTime: [number, number] | null = null;
 
 	constructor(hashAlgorithm: string, dataLength: number = 10000000, seed: number = 28) {
+		if (dataLength <= 0) {
+			throw new Error("Data length must be greater than 0");
+		}
+
 		this.hashAlgorithm = hashAlgorithm;
 		this.testData = Buffer.alloc(dataLength);
 		const random = seedrandom(seed.toString());
@@ -20,6 +24,11 @@ class BenchmarkCls {
 		}
 	}
 
+	getTestData(): Buffer {
+		return this.testData;
+	}
+
+	// recalling startBenchmarking() is allowed to reset the benchmarking data
 	startBenchmarking() {
 		this.result = null;		
 		this.startCpu = process.cpuUsage();
@@ -27,9 +36,10 @@ class BenchmarkCls {
 		this.startTime = process.hrtime();
 	}
 
+	// call this method to calculate the benchmarking result at this moment, allow multiple calls based on the same startBenchmarking() data
 	calcBenchmarking() {
 		if (!this.startTime || !this.startCpu) {
-			return;
+			return; // Benchmarking not started, do nothing
 		}
 		const endTime = process.hrtime(this.startTime);
 		const endCpu = process.cpuUsage(this.startCpu);
@@ -42,7 +52,18 @@ class BenchmarkCls {
 			ExecutionTime: endTime[0] * 1000 + endTime[1] / 1e6, // Convert to milliseconds
 			FinishedTime: new Date()
 		};
-	}	
+	}
+
+	resetBenchmarking() {
+		this.result = null;
+		this.startCpu = null;
+		this.startMemory = 0;
+		this.startTime = null;
+	}
+
+	getResult(): IBenchmarkResult | null {
+		return this.result;
+	}
 }
 
 export default BenchmarkCls;
