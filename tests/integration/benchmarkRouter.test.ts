@@ -34,4 +34,32 @@ describe('benchmarkRouter Endpoints', () => {
 			});
 		});
 	});
+
+	describe('GET /benchmark/Md5/:execTimes', () => {
+		const execTimes = 100;
+		it('should return 401 Unauthorized without credentials', async () => {
+			const res = await request(app)
+				.get(`/benchmark/Md5/${execTimes}/`)
+				.expect(401);
+
+			expect(res.body).toHaveProperty('message', 'Unauthorized');
+		});
+
+		it('should return executed benchmark result', async () => {
+			const res = await request(app)
+				.get(`/benchmark/Md5/${execTimes}`)
+				.auth(testAuth.username, testAuth.password)
+				.expect(200);
+
+			expect(res.body).toEqual({
+				message: {
+					Algorithm: 'md5',
+					CpuTime: expect.any(Number),
+					MemoryUsed: expect.any(Number),
+					ExecutionTime: expect.any(Number),
+					FinishedTime: expect.any(String),
+				},
+			});
+		});
+	});
 });
