@@ -5,7 +5,9 @@ const basicAuth = expressBasicAuth({
 		'eric': 'cheng',
 		'korina': 'cheng',
 		'tonia': 'cheng',
-	}
+	},
+	unauthorizedResponse: () => ({ message: 'Unauthorized' }),
+	challenge: false,
 });
 
 export default basicAuth;
