@@ -7,6 +7,9 @@ describe('benchmarkRouter Endpoints', () => {
 		password: process.env.TEST_AUTH_PASSWORD || '',
 	};
 
+	console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
+	console.log('testAuth:', testAuth);
+
 	describe('GET /benchmark/Sha256/:execTimes', () => {
 		const execTimes = 100;
 		it('should return 401 Unauthorized without credentials', async () => {
