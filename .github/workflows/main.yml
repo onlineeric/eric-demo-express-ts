@@ -31,6 +31,12 @@ jobs:
     - name: Install dependencies
       run: yarn install
 
+    - name: Set environment variables from secrets
+      env:
+        TEST_AUTH_USER: ${{ secrets.TEST_AUTH_USER }}
+        TEST_AUTH_PASSWORD: ${{ secrets.TEST_AUTH_PASSWORD }}
+      run: echo "Environment variables set"
+
     - name: Run tests
       run: yarn test
 
