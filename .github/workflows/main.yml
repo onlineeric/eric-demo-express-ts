@@ -73,22 +73,26 @@ jobs:
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
+    - name: "Login via Docker Hub"
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
     - name: Build Docker image
-      run: docker build -t my-docker-image:${{ github.sha }} .
+      run: docker build -t onlineeric/eric-express-ts:${{ github.sha }} -t onlineeric/eric-express-ts:latest .
 
     - name: Push Docker image
-      run: docker push my-docker-image:${{ github.sha }}
+      run: docker push --all-tags my-docker-image
 
   deploy:
     runs-on: ubuntu-latest
     needs: docker
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: "my-azure-webapp"
+        app-name: "eric-express-ts"
         slot-name: "production"
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        images: onlineeric/eric-express-ts:latest
