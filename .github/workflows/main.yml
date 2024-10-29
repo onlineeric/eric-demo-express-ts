@@ -29,7 +29,7 @@ jobs:
           ${{ runner.os }}-yarn-
 
     - name: Install dependencies
-      run: yarn install
+      run: yarn install --production
 
     - name: Run tests
       env:
@@ -58,12 +58,12 @@ jobs:
           ${{ runner.os }}-yarn-
 
     - name: Install dependencies
-      run: yarn install
+      run: yarn install --production
 
     - name: Build project
       run: yarn build
 
-    - name: Upload dist folder
+    - name: Upload dist folder to artifacts
       uses: actions/upload-artifact@v3
       with:
         name: dist
@@ -82,7 +82,7 @@ jobs:
         username: ${{ vars.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-    - name: Download dist folder
+    - name: Download dist folder from artifacts
       uses: actions/download-artifact@v3
       with:
         name: dist

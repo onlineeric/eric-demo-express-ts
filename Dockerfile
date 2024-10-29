@@ -1,9 +1,14 @@
-FROM node:latest
+FROM node:22-alpine
 
 WORKDIR /app
 
-COPY dist .
+COPY package.json ./
+COPY yarn.lock ./
+
+RUN yarn install --production
+
+COPY dist ./server
 
 EXPOSE 5000
 
-CMD ["node", "server.js"]
+CMD ["node", "server/server.js"]
