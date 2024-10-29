@@ -92,7 +92,7 @@ jobs:
       run: docker build -t onlineeric/eric-express-ts:${{ github.sha }} -t onlineeric/eric-express-ts:latest .
 
     - name: Push Docker image
-      run: docker push --all-tags my-docker-image
+      run: docker push --all-tags onlineeric/eric-express-ts
 
   deploy:
     runs-on: ubuntu-latest
