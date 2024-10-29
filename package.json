@@ -1,7 +1,7 @@
 {
   "name": "eric-demo-express-ts",
-  "version": "0.0.1",
-  "description": "Eric's demo Express Server in TS",
+  "version": "1.0.0",
+  "description": "Eric's demo Express Server in TypeScript",
   "main": "server.ts",
   "scripts": {
     "start": "set NODE_ENV=development&&ts-node src/server.ts",
