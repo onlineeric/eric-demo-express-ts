@@ -19,12 +19,12 @@ This project serves as a demonstration of my Node Js Express Server knowledge an
 
 ## Demo Site
 
-You can view [My Demo Website](https://agreeable-water-061d90800.5.azurestaticapps.net) built using React, connected to this API backend, a C# backend and a GoLang backend.
+You can view [My Demo Website](https://agreeable-water-061d90800.5.azurestaticapps.net) built using React, connected to this Express API, a C# backend and a GoLang backend.
 
 ## Goals
 
 1. Demonstrate my Node Js, Typescript and Express server knowledge.
-2. Demonstrate both Restful API and GraphQL API.
+2. Demonstrate both Restful API and GraphQL API(next phase).
 3. Demonstrate CICD pipeline setup with Github Actions, Docker Hub and Azure Web App.
 4. Keep it as a simple reference for my personal use.
 
