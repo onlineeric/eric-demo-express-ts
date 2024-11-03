@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from "express";
+import cors from "cors";
 import basicAuth from "./middlewares/basicAuth";
 import simpleRouter from "./routes/simpleRouter";
 import benchmarkRouter from "./routes/benchmarkRouter";
@@ -9,6 +10,7 @@ import { version as appVersion } from '../package.json';
 const app: Application = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json()); // To handle JSON requests
 
 // Unprotected Routes (No Auth Required)
