@@ -15,7 +15,10 @@ app.use(express.json()); // To handle JSON requests
 
 // Unprotected Routes (No Auth Required)
 app.get('/', (req: Request, res: Response) => {
-  res.send(`Hello, TypeScript with Express! Version: ${appVersion}`);
+	res.send(`Hello, TypeScript with Express! Version: ${appVersion}`);
+});
+app.get('/status', (req: Request, res: Response) => {
+	res.send(`Version ${appVersion} is running`);
 });
 
 // Protected Routes from here (Auth Required)
