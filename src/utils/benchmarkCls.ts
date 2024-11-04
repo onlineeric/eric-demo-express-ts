@@ -34,7 +34,7 @@ class BenchmarkCls {
 		this.result = null;		
 		this.startCpu = process.cpuUsage();
 		this.startMemory = process.memoryUsage().heapUsed;
-		this.startTime = process.hrtime();
+		this.startTime = process.hrtime(); // High-resolution real time, a very accurate timer
 	}
 
 	// call this method to calculate the benchmarking result at this moment, allow multiple calls based on the same startBenchmarking() data
