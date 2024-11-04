@@ -1,5 +1,6 @@
 import seedrandom from "seedrandom";
 import IBenchmarkResult from "./IBenchmarkResult";
+import { v4 as uuidv4 } from "uuid";
 
 class BenchmarkCls {
 	private hashAlgorithm: string;
@@ -46,11 +47,14 @@ class BenchmarkCls {
 		const endMemory = process.memoryUsage().heapUsed;
 
 		this.result = {
-			Algorithm: this.hashAlgorithm,
-			CpuTime: (endCpu.user + endCpu.system) / 1000, // Convert to milliseconds
-			MemoryUsed: endMemory - this.startMemory,
-			ExecutionTime: endTime[0] * 1000 + endTime[1] / 1e6, // Convert to milliseconds
-			FinishedTime: new Date()
+			server: "Express Server",
+			id: uuidv4(),
+			algorithm: this.hashAlgorithm,
+			parallelization: false,
+			cpuTime: (endCpu.user + endCpu.system) / 1000, // Convert to milliseconds
+			memoryUsed: endMemory - this.startMemory,
+			executionTime: endTime[0] * 1000 + endTime[1] / 1e6, // Convert to milliseconds
+			finishedTime: new Date()
 		};
 	}
 

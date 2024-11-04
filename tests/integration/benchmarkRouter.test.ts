@@ -24,13 +24,14 @@ describe('benchmarkRouter Endpoints', () => {
 				.expect(200);
 
 			expect(res.body).toEqual({
-				message: {
-					Algorithm: 'sha256',
-					CpuTime: expect.any(Number),
-					MemoryUsed: expect.any(Number),
-					ExecutionTime: expect.any(Number),
-					FinishedTime: expect.any(String),
-				},
+				server: 'Express Server',
+				id: expect.any(String),
+				algorithm: 'sha256',
+				parallelization: false,
+				cpuTime: expect.any(Number),
+				memoryUsed: expect.any(Number),
+				executionTime: expect.any(Number),
+				finishedTime: expect.any(String),
 			});
 		});
 	});
@@ -52,13 +53,14 @@ describe('benchmarkRouter Endpoints', () => {
 				.expect(200);
 
 			expect(res.body).toEqual({
-				message: {
-					Algorithm: 'md5',
-					CpuTime: expect.any(Number),
-					MemoryUsed: expect.any(Number),
-					ExecutionTime: expect.any(Number),
-					FinishedTime: expect.any(String),
-				},
+				server: 'Express Server',
+				id: expect.any(String),
+				algorithm: 'md5',
+				parallelization: false,
+				cpuTime: expect.any(Number),
+				memoryUsed: expect.any(Number),
+				executionTime: expect.any(Number),
+				finishedTime: expect.any(String),
 			});
 		});
 	});

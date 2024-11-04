@@ -31,11 +31,11 @@ describe('BenchmarkCls', () => {
 		benchmark.calcBenchmarking();
 		const result = benchmark.getResult();
 		expect(result).not.toBeNull();
-		expect(result?.Algorithm).toBe('sha256');
-		expect(result?.CpuTime).toBeGreaterThanOrEqual(0);
-		expect(result?.MemoryUsed).toBeGreaterThanOrEqual(0);
-		expect(result?.ExecutionTime).toBeGreaterThanOrEqual(0);
-		expect(result?.FinishedTime).toBeInstanceOf(Date);
+		expect(result?.algorithm).toBe('sha256');
+		expect(result?.cpuTime).toBeGreaterThanOrEqual(0);
+		expect(result?.memoryUsed).toBeGreaterThanOrEqual(0);
+		expect(result?.executionTime).toBeGreaterThanOrEqual(0);
+		expect(result?.finishedTime).toBeInstanceOf(Date);
 	});
 
 	test('resetBenchmarking clears the benchmarking data', () => {

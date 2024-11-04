@@ -20,7 +20,7 @@ export function handleSha256Request(req: Request, res: Response) {
 	benchmarkCls.calcBenchmarking();
 
 	// Send Response
-	res.send({ message: benchmarkCls.getResult() });
+	res.send(benchmarkCls.getResult());
 }
 
 export function handleMd5Request(req: Request, res: Response) {
@@ -41,5 +41,5 @@ export function handleMd5Request(req: Request, res: Response) {
 	benchmarkCls.calcBenchmarking();
 
 	// Send Response
-	res.send({ message: benchmarkCls.getResult() });
+	res.send(benchmarkCls.getResult());
 }
