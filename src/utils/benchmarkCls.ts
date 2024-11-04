@@ -12,7 +12,7 @@ class BenchmarkCls {
 	private startMemory: number = 0;
 	private startTime: [number, number] | null = null;
 
-	constructor(hashAlgorithm: string, dataLength: number = 10000000, seed: number = 28) {
+	constructor(hashAlgorithm: 'SHA256' | 'MD5', dataLength: number = 10000000, seed: number = 28) {
 		if (dataLength <= 0) {
 			throw new Error("Data length must be greater than 0");
 		}
@@ -31,7 +31,7 @@ class BenchmarkCls {
 
 	// recalling startBenchmarking() is allowed to reset the benchmarking data
 	startBenchmarking() {
-		this.result = null;		
+		this.result = null;
 		this.startCpu = process.cpuUsage();
 		this.startMemory = process.memoryUsage().heapUsed;
 		this.startTime = process.hrtime(); // High-resolution real time, a very accurate timer
@@ -51,9 +51,9 @@ class BenchmarkCls {
 			id: uuidv4(),
 			algorithm: this.hashAlgorithm,
 			parallelization: false,
-			cpuTime: (endCpu.user + endCpu.system) / 1000, // Convert to milliseconds
+			cpuTime: Math.round((endCpu.user + endCpu.system) / 1000), // Convert to milliseconds
 			memoryUsed: endMemory - this.startMemory,
-			executionTime: endTime[0] * 1000 + endTime[1] / 1e6, // Convert to milliseconds
+			executionTime: Math.round(endTime[0] * 1000 + endTime[1] / 1e6), // Convert to milliseconds
 			finishedTime: new Date()
 		};
 	}
