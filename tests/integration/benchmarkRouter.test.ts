@@ -26,7 +26,7 @@ describe('benchmarkRouter Endpoints', () => {
 			expect(res.body).toEqual({
 				server: 'Express Server',
 				id: expect.any(String),
-				algorithm: 'sha256',
+				algorithm: 'SHA256',
 				parallelization: false,
 				cpuTime: expect.any(Number),
 				memoryUsed: expect.any(Number),
@@ -55,7 +55,7 @@ describe('benchmarkRouter Endpoints', () => {
 			expect(res.body).toEqual({
 				server: 'Express Server',
 				id: expect.any(String),
-				algorithm: 'md5',
+				algorithm: 'MD5',
 				parallelization: false,
 				cpuTime: expect.any(Number),
 				memoryUsed: expect.any(Number),

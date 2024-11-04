@@ -4,7 +4,7 @@ import BenchmarkCls from '../utils/benchmarkCls';
 
 export function handleSha256Request(req: Request, res: Response) {
 	const loopCount = parseInt(req.params.execTimes) || 1000;
-	const HASH_ALGORITHM = 'sha256';
+	const HASH_ALGORITHM = 'SHA256';
 
 	const benchmarkCls = new BenchmarkCls(HASH_ALGORITHM);
 
@@ -25,7 +25,7 @@ export function handleSha256Request(req: Request, res: Response) {
 
 export function handleMd5Request(req: Request, res: Response) {
 	const loopCount = parseInt(req.params.execTimes) || 1000;
-	const HASH_ALGORITHM = 'md5';
+	const HASH_ALGORITHM = 'MD5';
 
 	const benchmarkCls = new BenchmarkCls(HASH_ALGORITHM);
 
