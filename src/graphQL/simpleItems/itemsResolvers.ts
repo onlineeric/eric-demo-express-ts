@@ -1,11 +1,11 @@
 import { createItemMutation, deleteItemMutation, updateItemMutation } from "./itemsMutations";
 import { getItemQuery } from "./itemsQueries";
-import items from "./itemsStore";
+import simpleItems from "./itemsStore";
 
 const itemsResolvers = {
 	Query: {
 		getItem: getItemQuery,
-		getItems: () => items,
+		getItems: () => simpleItems,
 	},
 	Mutation: {
 		createItem: createItemMutation,

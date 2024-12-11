@@ -1,14 +1,14 @@
-import items from "./itemsStore";
-import { CreateItemInput, Item } from "./itemsDefs";
+import simpleItems from "./itemsStore";
+import { CreateSimpleItemInput, SimpleItem } from "./itemsDefs";
 
-export const createItemMutation = (_: any, { item }: { item: CreateItemInput }) => {
-	const newItem = { id: `${items.length + 1}`, name: item.name, contact: item.contact } as Item;
-	items.push(newItem);
+export const createItemMutation = (_: any, { item }: { item: CreateSimpleItemInput }) => {
+	const newItem = { id: `${simpleItems.length + 1}`, name: item.name, contact: item.contact } as SimpleItem;
+	simpleItems.push(newItem);
 	return newItem;
 };
 
-export const updateItemMutation = (_: any, { item }: { item: Item }) => {
-	const existingItem = items.find((i) => i.id === item.id);
+export const updateItemMutation = (_: any, { item }: { item: SimpleItem }) => {
+	const existingItem = simpleItems.find((i) => i.id === item.id);
 	if (existingItem) {
 		existingItem.name = item.name;
 		existingItem.contact = item.contact;
@@ -18,9 +18,9 @@ export const updateItemMutation = (_: any, { item }: { item: Item }) => {
 };
 
 export const deleteItemMutation = (_: any, { id }: { id: string }) => {
-	const index = items.findIndex((item) => item.id === id);
+	const index = simpleItems.findIndex((item) => item.id === id);
 	if (index !== -1) {
-		items.splice(index, 1);
+		simpleItems.splice(index, 1);
 		return `Item with id ${id} deleted`;
 	}
 	throw new Error("Item not found");

@@ -42,20 +42,20 @@ const itemsDefs = gql`
 `;
 
 // typescript interfaces
-export interface Contact {
+export interface SimpleItemContact {
 	email?: string;
 	address?: string;
 }
 
-export interface CreateItemInput {
+export interface CreateSimpleItemInput {
 	name: string;
-	contact?: Contact;
+	contact?: SimpleItemContact;
 }
 
-export interface Item {
+export interface SimpleItem {
 	id: string;
 	name: string;
-	contact?: Contact;
+	contact?: SimpleItemContact;
 }
 
 export default itemsDefs;

@@ -1,6 +1,6 @@
-import { Item } from "./itemsDefs";
+import { SimpleItem } from "./itemsDefs";
 
-let items: Item[] = [
+let simpleItems: SimpleItem[] = [
 	{
 		id: "1",
 		name: "Item 1",
@@ -83,4 +83,4 @@ let items: Item[] = [
 	},
 ];
 
-export default items;
+export default simpleItems;
