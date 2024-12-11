@@ -1,18 +1,20 @@
 import items from "./itemsStore";
+import { CreateItemInput, Item } from "./itemsDefs";
 
-export const createItemMutation = (_: any, { name }: { name: string }) => {
-	const newItem = { id: `${items.length + 1}`, name };
+export const createItemMutation = (_: any, { item }: { item: CreateItemInput }) => {
+	const newItem = { id: `${items.length + 1}`, name: item.name, contact: item.contact } as Item;
 	items.push(newItem);
 	return newItem;
 };
 
-export const updateItemMutation = (_: any, { id, name }: { id: string; name: string }) => {
-	const item = items.find((item) => item.id === id);
-	if (item) {
-		item.name = name;
-		return item;
+export const updateItemMutation = (_: any, { item }: { item: Item }) => {
+	const existingItem = items.find((i) => i.id === item.id);
+	if (existingItem) {
+		existingItem.name = item.name;
+		existingItem.contact = item.contact;
+		return existingItem;
 	}
-	throw new Error("Item not found");
+	throw new Error(`Item not found by id: ${item.id}`);
 };
 
 export const deleteItemMutation = (_: any, { id }: { id: string }) => {
