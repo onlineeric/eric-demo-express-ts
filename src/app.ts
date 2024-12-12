@@ -3,6 +3,8 @@ import cors from "cors";
 import basicAuth from "./middlewares/basicAuth";
 import simpleRouter from "./routes/simpleRouter";
 import benchmarkRouter from "./routes/benchmarkRouter";
+import { ApolloServer } from "apollo-server-express";
+import { myResolvers, myTypeDefs } from "./graphQL/apolloServerLib";
 
 // import package.json and read the version
 import { version as appVersion } from '../package.json';
@@ -27,5 +29,13 @@ app.use(basicAuth);
 app.use('/simple', simpleRouter);
 
 app.use('/benchmark', benchmarkRouter);
+
+// Create Apollo Server
+const apolloServer = new ApolloServer({ typeDefs: myTypeDefs, resolvers: myResolvers });
+
+// Apply middleware to the app
+apolloServer.start().then(() => {
+	apolloServer.applyMiddleware({ app, path: "/graphQL" });
+});
 
 export default app;
