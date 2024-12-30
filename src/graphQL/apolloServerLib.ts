@@ -11,7 +11,12 @@ export const myTypeDefs = gql`
 `;
 
 export const myResolvers = {
-	...itemsResolvers,
-	...langChainResolvers,
+	Query: {
+		...itemsResolvers.Query,
+		...langChainResolvers.Query,
+	},
+	Mutation: {
+		...itemsResolvers.Mutation,
+	},
 	// Add more resolvers here
 };
