@@ -14,14 +14,14 @@ const itemsDefs = gql`
 	}
 
 	type Query {
-		getItem(id: ID!): Item
-		getItems: [Item]
+		getSimpleItem(id: ID!): Item
+		getSimpleItems: [Item]
 	}
 
 	type Mutation {
-		createItem(item: CreateItemInput!): Item
-		updateItem(item: UpdateItemInput!): Item
-		deleteItem(id: ID!): String
+		createSimpleItem(item: CreateItemInput!): Item
+		updateSimpleItem(item: UpdateItemInput!): Item
+		deleteSimpleItem(id: ID!): String
 	}
 
 	input CreateItemInput {

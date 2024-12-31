@@ -4,13 +4,13 @@ import simpleItems from "./itemsStore";
 
 const itemsResolvers = {
 	Query: {
-		getItem: getItemQuery,
-		getItems: () => simpleItems,
+		getSimpleItem: getItemQuery,
+		getSimpleItems: () => simpleItems,
 	},
 	Mutation: {
-		createItem: createItemMutation,
-		updateItem: updateItemMutation,
-		deleteItem: deleteItemMutation,
+		createSimpleItem: createItemMutation,
+		updateSimpleItem: updateItemMutation,
+		deleteSimpleItem: deleteItemMutation,
 	},
 };
 

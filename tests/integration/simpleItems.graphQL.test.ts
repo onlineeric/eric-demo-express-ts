@@ -10,7 +10,7 @@ describe('GraphQL Endpoint', () => {
 	it('should fetch all items', async () => {
 		const query = `
 			query {
-				getItems {
+				getSimpleItems {
 					id
 					name
 					contact {
@@ -27,18 +27,18 @@ describe('GraphQL Endpoint', () => {
 			.auth(testAuth.username, testAuth.password)
 			.expect(200);
 
-		expect(res.body.data.getItems).toBeInstanceOf(Array);
-		expect(res.body.data.getItems[0]).toHaveProperty('id', '1');
-		expect(res.body.data.getItems[0]).toHaveProperty('name');
-		expect(res.body.data.getItems[0]).toHaveProperty('contact');
-		expect(res.body.data.getItems[0].contact).toHaveProperty('email');
-		expect(res.body.data.getItems[0].contact).toHaveProperty('address');
+		expect(res.body.data.getSimpleItems).toBeInstanceOf(Array);
+		expect(res.body.data.getSimpleItems[0]).toHaveProperty('id', '1');
+		expect(res.body.data.getSimpleItems[0]).toHaveProperty('name');
+		expect(res.body.data.getSimpleItems[0]).toHaveProperty('contact');
+		expect(res.body.data.getSimpleItems[0].contact).toHaveProperty('email');
+		expect(res.body.data.getSimpleItems[0].contact).toHaveProperty('address');
 	});
 
 	it('should fetch an item by id', async () => {
 		const query = `
-			query GetItem($id: ID!) {
-				getItem(id: $id) {
+			query GetSimpleItem($id: ID!) {
+				getSimpleItem(id: $id) {
 					id
 					name
 					contact {
@@ -57,17 +57,17 @@ describe('GraphQL Endpoint', () => {
 			.auth(testAuth.username, testAuth.password)
 			.expect(200);
 
-		expect(res.body.data.getItem).toHaveProperty('id', '1');
-		expect(res.body.data.getItem).toHaveProperty('name');
-		expect(res.body.data.getItem).toHaveProperty('contact');
-		expect(res.body.data.getItem.contact).toHaveProperty('email');
-		expect(res.body.data.getItem.contact).toHaveProperty('address');
+		expect(res.body.data.getSimpleItem).toHaveProperty('id', '1');
+		expect(res.body.data.getSimpleItem).toHaveProperty('name');
+		expect(res.body.data.getSimpleItem).toHaveProperty('contact');
+		expect(res.body.data.getSimpleItem.contact).toHaveProperty('email');
+		expect(res.body.data.getSimpleItem.contact).toHaveProperty('address');
 	});
 
 	it('should create a new item', async () => {
 		const mutation = `
-			mutation CreateItem($item: CreateItemInput!) {
-				createItem(item: $item) {
+			mutation CreateSimpleItem($item: CreateItemInput!) {
+				createSimpleItem(item: $item) {
 					id
 					name
 					contact {
@@ -94,13 +94,13 @@ describe('GraphQL Endpoint', () => {
 			.auth(testAuth.username, testAuth.password)
 			.expect(200);
 
-		expect(res.body.data.createItem).toHaveProperty('id');
-		expect(res.body.data.createItem).toHaveProperty('name', variables.item.name);
+		expect(res.body.data.createSimpleItem).toHaveProperty('id');
+		expect(res.body.data.createSimpleItem).toHaveProperty('name', variables.item.name);
 
 		// get the item from server again to verify if the item was created
 		const query = `
-			query GetItem($id: ID!) {
-				getItem(id: $id) {
+			query GetSimpleItem($id: ID!) {
+				getSimpleItem(id: $id) {
 					id
 					name
 					contact {
@@ -111,7 +111,7 @@ describe('GraphQL Endpoint', () => {
 			}
 		`;
 
-		const getVars = { id: res.body.data.createItem.id };
+		const getVars = { id: res.body.data.createSimpleItem.id };
 
 		const getRes = await request(app)
 			.post('/graphQL')
@@ -119,17 +119,17 @@ describe('GraphQL Endpoint', () => {
 			.auth(testAuth.username, testAuth.password)
 			.expect(200);
 
-		expect(getRes.body.data.getItem).toHaveProperty('id', res.body.data.createItem.id);
-		expect(getRes.body.data.getItem).toHaveProperty('name', variables.item.name);
-		expect(getRes.body.data.getItem).toHaveProperty('contact');
-		expect(getRes.body.data.getItem.contact).toHaveProperty('email', variables.item.contact.email);
-		expect(getRes.body.data.getItem.contact).toHaveProperty('address', variables.item.contact.address);
+		expect(getRes.body.data.getSimpleItem).toHaveProperty('id', res.body.data.createSimpleItem.id);
+		expect(getRes.body.data.getSimpleItem).toHaveProperty('name', variables.item.name);
+		expect(getRes.body.data.getSimpleItem).toHaveProperty('contact');
+		expect(getRes.body.data.getSimpleItem.contact).toHaveProperty('email', variables.item.contact.email);
+		expect(getRes.body.data.getSimpleItem.contact).toHaveProperty('address', variables.item.contact.address);
 	});
 
 	it('should update an item', async () => {
 		const mutation = `
-			mutation UpdateItem($item: UpdateItemInput!) {
-				updateItem(item: $item) {
+			mutation UpdateSimpleItem($item: UpdateItemInput!) {
+				updateSimpleItem(item: $item) {
 					id
 					name
 					contact {
@@ -157,12 +157,12 @@ describe('GraphQL Endpoint', () => {
 			.auth(testAuth.username, testAuth.password)
 			.expect(200);
 
-		expect(res.body.data.updateItem).toHaveProperty('name', 'Updated Item');
+		expect(res.body.data.updateSimpleItem).toHaveProperty('name', 'Updated Item');
 
 		// get the item from server again to verify if the item was updated
 		const query = `
-			query GetItem($id: ID!) {
-				getItem(id: $id) {
+			query GetSimpleItem($id: ID!) {
+				getSimpleItem(id: $id) {
 					id
 					name
 					contact {
@@ -181,18 +181,18 @@ describe('GraphQL Endpoint', () => {
 			.auth(testAuth.username, testAuth.password)
 			.expect(200);
 
-		expect(getRes.body.data.getItem).toHaveProperty('id', variables.item.id);
-		expect(getRes.body.data.getItem).toHaveProperty('name', variables.item.name);
-		expect(getRes.body.data.getItem).toHaveProperty('contact');
-		expect(getRes.body.data.getItem.contact).toHaveProperty('email', variables.item.contact.email);
-		expect(getRes.body.data.getItem.contact).toHaveProperty('address', variables.item.contact.address);
+		expect(getRes.body.data.getSimpleItem).toHaveProperty('id', variables.item.id);
+		expect(getRes.body.data.getSimpleItem).toHaveProperty('name', variables.item.name);
+		expect(getRes.body.data.getSimpleItem).toHaveProperty('contact');
+		expect(getRes.body.data.getSimpleItem.contact).toHaveProperty('email', variables.item.contact.email);
+		expect(getRes.body.data.getSimpleItem.contact).toHaveProperty('address', variables.item.contact.address);
 
 	});
 
 	it('should delete an item', async () => {
 		const mutation = `
-			mutation DeleteItem($id: ID!) {
-				deleteItem(id: $id)
+			mutation DeleteSimpleItem($id: ID!) {
+				deleteSimpleItem(id: $id)
 			}
 		`;
 
@@ -204,12 +204,12 @@ describe('GraphQL Endpoint', () => {
 			.auth(testAuth.username, testAuth.password)
 			.expect(200);
 
-		expect(res.body.data.deleteItem).toBe(`Item with id ${variables.id} deleted`);
+		expect(res.body.data.deleteSimpleItem).toBe(`Item with id ${variables.id} deleted`);
 
 		// get the item from server to verify if the item was deleted
 		const query = `
-			query GetItem($id: ID!) {
-				getItem(id: $id) {
+			query GetSimpleItem($id: ID!) {
+				getSimpleItem(id: $id) {
 					id
 					name
 					contact {
@@ -228,13 +228,13 @@ describe('GraphQL Endpoint', () => {
 			.auth(testAuth.username, testAuth.password)
 			.expect(200);
 
-		expect(getRes.body.data.getItem).toBeNull();
+		expect(getRes.body.data.getSimpleItem).toBeNull();
 	});
 
 	it('should return 401 Unauthorized without credentials', async () => {
 		const query = `
 			query {
-				getItems {
+				getSimpleItems {
 					id
 				}
 			}
