@@ -1,6 +1,6 @@
 {
   "name": "eric-demo-express-ts",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Eric's demo Express Server in TypeScript",
   "main": "server.ts",
   "scripts": {
