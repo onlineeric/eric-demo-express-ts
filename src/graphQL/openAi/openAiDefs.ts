@@ -12,8 +12,8 @@ const openAiDefs = gql`
 	}
 
 	type InitOpenAiOutput {
-		ragAgentId: String!
-		threadId: String!
+		ragAgentId: String
+		threadId: String
 	}
 `;
 
@@ -24,8 +24,8 @@ export interface InitOpenAiInput {
 }
 
 export interface InitOpenAiOutput {
-	RagAgentId: string;
-	threadId: string;
+	ragAgentId: string | null;
+	threadId: string | null;
 }
 
 export default openAiDefs;
