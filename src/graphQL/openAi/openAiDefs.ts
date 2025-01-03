@@ -2,18 +2,18 @@ import { gql } from "apollo-server-express";
 
 // GraphQL type definitions and resolvers
 const openAiDefs = gql`
-	type Query {
-		initOpenAi(input: InitOpenAiInput): InitOpenAiOutput
-	}
-
 	input InitOpenAiInput {
-		getRagAgent: bool!
-		createNewThread: bool!
+		getRagAgent: Boolean!
+		createNewThread: Boolean!
 	}
 
 	type InitOpenAiOutput {
 		ragAgentId: String
 		threadId: String
+	}
+
+	type Mutation {
+		initOpenAi(input: InitOpenAiInput): InitOpenAiOutput
 	}
 `;
 

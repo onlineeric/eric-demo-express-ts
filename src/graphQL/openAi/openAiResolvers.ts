@@ -1,7 +1,7 @@
-import { initOpenAi } from "./openAiQueries";
+import { initOpenAi } from "./openAiMutations";
 
 const openAiResolvers = {
-	Query: {
+	Mutation: {
 		initOpenAi: initOpenAi,
 	}
 };
