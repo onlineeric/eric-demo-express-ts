@@ -19,7 +19,7 @@ export const getLangChainResponse = async (
 	const prompt = ChatPromptTemplate.fromMessages(chatHistory);
 
 	const chatModelOpenAI = new ChatOpenAI({
-		apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+		apiKey: process.env.OPENAI_API_KEY,
 		model: input.dataModel,
 		temperature: input.temperature,
 	});

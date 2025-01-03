@@ -1,4 +1,5 @@
 import { gql } from "apollo-server-express";
+import OpenAI from "openai";
 
 // GraphQL type definitions and resolvers
 const openAiDefs = gql`
@@ -8,8 +9,8 @@ const openAiDefs = gql`
 	}
 
 	type InitOpenAiOutput {
-		ragAgentId: String
-		threadId: String
+		ragAgent: String
+		thread: String
 	}
 
 	type Mutation {
@@ -24,8 +25,8 @@ export interface InitOpenAiInput {
 }
 
 export interface InitOpenAiOutput {
-	ragAgentId: string | null;
-	threadId: string | null;
+	ragAgent: OpenAI.Beta.Assistants.Assistant | null;
+	thread: OpenAI.Beta.Threads.Thread | null;
 }
 
 export default openAiDefs;
